@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ends game with loss if max guesses reached 1`] = `
+<div>
+  <div
+    class="Snowman"
+  >
+    <img
+      alt="2"
+      src="2.png"
+    />
+    <p>
+      Number wrong: 
+      2
+    </p>
+    <p
+      class="Snowman-word"
+    >
+      _
+      _
+      _
+      _
+    </p>
+    <p>
+      You lose: test
+    </p>
+    <button>
+      Restart
+    </button>
+  </div>
+</div>
+`;

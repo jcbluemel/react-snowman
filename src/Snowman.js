@@ -33,15 +33,14 @@ function Snowman({
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
   const [answer, setAnswer] = useState(randomWord(words));
-  const lose = nWrong === maxWrong;
 
   /** guessedWord: show current-state of word:
    if guessed letters are {a,p,e}, show "app_e" for "apple"
    */
   function guessedWord() {
     return answer
-      .split("")
-      .map(ltr => (guessedLetters.has(ltr) ? ltr : "_"));
+            .split("")
+            .map(ltr => (guessedLetters.has(ltr) ? ltr : "_"));
   }
 
   /** handleGuess: handle a guessed letter:
@@ -74,12 +73,32 @@ function Snowman({
     ));
   }
 
+  /** generateMsgOrButtons: return buttons or lose/win msg */
+  function generateMsgOrButtons() {
+    let won = !(guessedWord().includes("_"));
+    if (won) {
+      return "You won!";
+    } else if (nWrong < maxWrong) {
+      return generateButtons();
+    } else {
+      return `You lose: ${answer}`;
+    }
+  }
+
+  /** restartGame: restarts game with new word and refreshed guesses */
+  function restartGame() {
+    setNWrong(0);
+    setAnswer(randomWord(words));
+    setGuessedLetters(() => new Set());
+  }
+
   return (
     <div className="Snowman">
       <img src={(images)[nWrong]} alt={nWrong} />
       <p>Number wrong: {nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
-      <p>{lose ? "You lose" : generateButtons()}</p>
+      <p>{generateMsgOrButtons()}</p>
+      <button onClick={restartGame}>Restart</button>
     </div>
   );
 }

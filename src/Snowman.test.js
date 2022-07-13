@@ -22,4 +22,5 @@ it("ends game with loss if max guesses reached", function () {
 
   expect(aBtn).not.toBeInTheDocument();
   expect(container).toContainHTML("You lose");
-})
+  expect(container).toMatchSnapshot();
+});
